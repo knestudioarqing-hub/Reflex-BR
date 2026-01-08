@@ -41,37 +41,10 @@ const useIntersectionObserver = (options: IntersectionObserverInit) => {
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        
-        // Show if scrolling up or at the very top, hide if scrolling down
-        if (currentScrollY === 0 || currentScrollY < lastScrollY) {
-          setIsVisible(true);
-        } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          setIsVisible(false);
-        }
-        
-        setLastScrollY(currentScrollY);
-      }
-    };
-
-    window.addEventListener('scroll', controlNavbar);
-
-    return () => {
-      window.removeEventListener('scroll', controlNavbar);
-    };
-  }, [lastScrollY]);
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 transition-transform duration-300 ease-in-out ${
-        isVisible ? 'translate-y-0' : '-translate-y-[150%]'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4"
     >
       <div className="w-full max-w-7xl flex items-center justify-between">
         {/* Logo */}
